@@ -6,14 +6,15 @@ import (
 
 type node struct {
 	value int
-	next *node
+	next  *node
 }
 
 type linkedlist struct {
-	head *node
-	tail *node
+	head   *node
+	tail   *node
 	length int
 }
+
 func (l *linkedlist) list() {
 	currentNode := l.head
 	if currentNode == nil {
@@ -22,13 +23,13 @@ func (l *linkedlist) list() {
 		return
 	}
 	for currentNode.next != nil {
-		fmt.Printf("%d, ",currentNode.value)
+		fmt.Printf("%d, ", currentNode.value)
 		currentNode = currentNode.next
 	}
-	fmt.Printf("%d\n",currentNode.value)
+	fmt.Printf("%d\n", currentNode.value)
 }
 
-func (l *linkedlist) push(v int)  {
+func (l *linkedlist) push(v int) {
 	newNode := &node{value: v}
 	if l.head == nil {
 		l.head = newNode
@@ -65,7 +66,7 @@ func (l *linkedlist) pop() (int, error) {
 	return currentNode.value, nil
 }
 
-func (l *linkedlist) shift() (int,error) {
+func (l *linkedlist) shift() (int, error) {
 	currentNode := l.head
 	if currentNode == nil {
 		// 0 item in linkedlist
@@ -94,11 +95,11 @@ func (l *linkedlist) unshift(v int) {
 }
 
 func (l *linkedlist) get(i int) (int, error) {
-	if  l.length == 0 || i >= l.length || i < 0 {
+	if l.length == 0 || i >= l.length || i < 0 {
 		return 0, fmt.Errorf("index not found")
 	}
 	currentNode := l.head
-	for j:=0;j<i;j++ {
+	for j := 0; j < i; j++ {
 		currentNode = currentNode.next
 	}
 	return currentNode.value, nil
@@ -109,14 +110,14 @@ func (l *linkedlist) set(i, v int) error {
 		return fmt.Errorf("index not found")
 	}
 	currentNode := l.head
-	for j:=0;j<i;j++ {
+	for j := 0; j < i; j++ {
 		currentNode = currentNode.next
 	}
 	currentNode.value = v
 	return nil
 }
 
-func (l *linkedlist) insert(i,v int) error {
+func (l *linkedlist) insert(i, v int) error {
 	if i > l.length || i < 0 {
 		return fmt.Errorf("index not found")
 	} else if i == 0 {
@@ -129,7 +130,7 @@ func (l *linkedlist) insert(i,v int) error {
 	newNode := &node{value: v}
 	var previousNode *node
 	currentNode := l.head
-	for j:=0;j<i;j++{
+	for j := 0; j < i; j++ {
 		previousNode = currentNode
 		currentNode = currentNode.next
 	}
@@ -148,7 +149,7 @@ func (l *linkedlist) remove(i int) error {
 	}
 	var previousNode *node
 	currentNode := l.head
-	for j:=0;j<i;j++ {
+	for j := 0; j < i; j++ {
 		previousNode = currentNode
 		currentNode = currentNode.next
 	}
@@ -168,7 +169,7 @@ func (l *linkedlist) reverse() {
 	currentNode := l.head
 	var previousNode *node
 	var nextNode *node
-	for i:=0;i<l.length;i++ {
+	for i := 0; i < l.length; i++ {
 		nextNode = currentNode.next
 		currentNode.next = previousNode
 		previousNode = currentNode
@@ -217,21 +218,21 @@ func main() {
 	fmt.Println(l.get(1))
 	fmt.Println(l.get(2))
 	fmt.Println(l.get(3))
-	fmt.Println(l.set(0,8))
+	fmt.Println(l.set(0, 8))
 	l.list()
-	fmt.Println(l.set(1,8))
+	fmt.Println(l.set(1, 8))
 	l.list()
-	fmt.Println(l.set(2,8))
+	fmt.Println(l.set(2, 8))
 	l.list()
-	fmt.Println(l.set(3,8))
+	fmt.Println(l.set(3, 8))
 	l.list()
-	fmt.Println(l.insert(3,9))
+	fmt.Println(l.insert(3, 9))
 	l.list()
-	fmt.Println(l.insert(2,9))
+	fmt.Println(l.insert(2, 9))
 	l.list()
-	fmt.Println(l.insert(1,9))
+	fmt.Println(l.insert(1, 9))
 	l.list()
-	fmt.Println(l.insert(0,9))
+	fmt.Println(l.insert(0, 9))
 	l.list()
 	fmt.Printf("length: %d\n", l.length)
 	fmt.Println(l.remove(5))
